@@ -3052,6 +3052,49 @@ function defer(observableFactory) {
   });
 }
 
+// node_modules/rxjs/dist/esm5/internal/observable/forkJoin.js
+function forkJoin() {
+  var args = [];
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+  var resultSelector = popResultSelector(args);
+  var _a = argsArgArrayOrObject(args), sources = _a.args, keys = _a.keys;
+  var result = new Observable(function(subscriber) {
+    var length = sources.length;
+    if (!length) {
+      subscriber.complete();
+      return;
+    }
+    var values = new Array(length);
+    var remainingCompletions = length;
+    var remainingEmissions = length;
+    var _loop_1 = function(sourceIndex2) {
+      var hasValue = false;
+      innerFrom(sources[sourceIndex2]).subscribe(createOperatorSubscriber(subscriber, function(value) {
+        if (!hasValue) {
+          hasValue = true;
+          remainingEmissions--;
+        }
+        values[sourceIndex2] = value;
+      }, function() {
+        return remainingCompletions--;
+      }, void 0, function() {
+        if (!remainingCompletions || !hasValue) {
+          if (!remainingEmissions) {
+            subscriber.next(keys ? createObject(keys, values) : values);
+          }
+          subscriber.complete();
+        }
+      }));
+    };
+    for (var sourceIndex = 0; sourceIndex < length; sourceIndex++) {
+      _loop_1(sourceIndex);
+    }
+  });
+  return resultSelector ? result.pipe(mapOneOrManyArgs(resultSelector)) : result;
+}
+
 // node_modules/rxjs/dist/esm5/internal/observable/fromEvent.js
 var nodeEventEmitterMethods = ["addListener", "removeListener"];
 var eventTargetMethods = ["addEventListener", "removeEventListener"];
@@ -3341,10 +3384,40 @@ function take(count2) {
   });
 }
 
+// node_modules/rxjs/dist/esm5/internal/operators/ignoreElements.js
+function ignoreElements() {
+  return operate(function(source, subscriber) {
+    source.subscribe(createOperatorSubscriber(subscriber, noop));
+  });
+}
+
 // node_modules/rxjs/dist/esm5/internal/operators/mapTo.js
 function mapTo(value) {
   return map(function() {
     return value;
+  });
+}
+
+// node_modules/rxjs/dist/esm5/internal/operators/delayWhen.js
+function delayWhen(delayDurationSelector, subscriptionDelay) {
+  if (subscriptionDelay) {
+    return function(source) {
+      return concat(subscriptionDelay.pipe(take(1), ignoreElements()), source.pipe(delayWhen(delayDurationSelector)));
+    };
+  }
+  return mergeMap(function(value, index) {
+    return innerFrom(delayDurationSelector(value, index)).pipe(take(1), mapTo(value));
+  });
+}
+
+// node_modules/rxjs/dist/esm5/internal/operators/delay.js
+function delay(due, scheduler) {
+  if (scheduler === void 0) {
+    scheduler = asyncScheduler;
+  }
+  var duration = timer(due, scheduler);
+  return delayWhen(function() {
+    return duration;
   });
 }
 
@@ -3636,6 +3709,21 @@ function takeUntil(notifier) {
       return subscriber.complete();
     }, noop));
     !subscriber.closed && source.subscribe(subscriber);
+  });
+}
+
+// node_modules/rxjs/dist/esm5/internal/operators/takeWhile.js
+function takeWhile(predicate, inclusive) {
+  if (inclusive === void 0) {
+    inclusive = false;
+  }
+  return operate(function(source, subscriber) {
+    var index = 0;
+    source.subscribe(createOperatorSubscriber(subscriber, function(value) {
+      var result = predicate(value, index++);
+      (result || inclusive) && subscriber.next(value);
+      !result && subscriber.complete();
+    }));
   });
 }
 
@@ -27355,6 +27443,7 @@ export {
   mergeAll,
   concat,
   defer,
+  forkJoin,
   fromEvent,
   merge,
   filter,
@@ -27365,6 +27454,7 @@ export {
   defaultIfEmpty,
   take,
   mapTo,
+  delay,
   distinctUntilChanged,
   finalize,
   first,
@@ -27372,11 +27462,13 @@ export {
   last2 as last,
   pairwise,
   scan,
+  share,
   shareReplay,
   skip,
   startWith,
   switchMap,
   takeUntil,
+  takeWhile,
   tap,
   XSS_SECURITY_URL,
   RuntimeError,
@@ -27890,4 +27982,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-OLDUE4TM.js.map
+//# sourceMappingURL=chunk-ESGFLNDA.js.map

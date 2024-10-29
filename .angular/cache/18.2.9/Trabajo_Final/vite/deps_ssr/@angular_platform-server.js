@@ -1,5 +1,15 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
+  AnimationDriver,
+  AnimationEngine,
+  AnimationRendererFactory,
+  AnimationStyleNormalizer,
+  NoopAnimationDriver,
+  WebAnimationsDriver,
+  WebAnimationsStyleNormalizer
+} from "./chunk-IAHHS4HG.js";
+import "./chunk-5TFL2EVI.js";
+import {
   BrowserDomAdapter,
   BrowserModule,
   DomRendererFactory2,
@@ -10,15 +20,6 @@ import {
   HTTP_ROOT_INTERCEPTOR_FNS,
   HttpClientModule
 } from "./chunk-TMCKGK2V.js";
-import {
-  AnimationDriver,
-  AnimationEngine,
-  AnimationRendererFactory,
-  AnimationStyleNormalizer,
-  NoopAnimationDriver,
-  WebAnimationsDriver,
-  WebAnimationsStyleNormalizer
-} from "./chunk-BBAVDOKC.js";
 import {
   DOCUMENT,
   NullViewportScroller,
