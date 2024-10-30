@@ -1,3 +1,4 @@
+import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   DataSource,
   ScrollingModule,
@@ -7,19 +8,18 @@ import {
   _VIEW_REPEATER_STRATEGY,
   _ViewRepeaterOperation,
   isDataSource
-} from "./chunk-6INKTGMH.js";
+} from "./chunk-3UO4XMVH.js";
 import {
   Directionality,
   MatCommonModule,
   Platform,
   _isNumberValue
-} from "./chunk-PM2OGMVF.js";
+} from "./chunk-3ZERYJQK.js";
 import {
   DOCUMENT
-} from "./chunk-6EJNABYM.js";
+} from "./chunk-XZSY3JNP.js";
 import {
   Attribute,
-  BehaviorSubject,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -39,21 +39,16 @@ import {
   Optional,
   Output,
   SkipSelf,
-  Subject,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation$1,
   afterNextRender,
   booleanAttribute,
-  combineLatest,
   inject,
-  isObservable,
-  map,
-  merge,
-  of,
+  require_cjs,
+  require_operators,
   setClassMetadata,
-  takeUntil,
   ɵɵInheritDefinitionFeature,
   ɵɵInputTransformsFeature,
   ɵɵNgOnChangesFeature,
@@ -87,9 +82,14 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-ESGFLNDA.js";
+} from "./chunk-TW4XVQZD.js";
+import {
+  __toESM
+} from "./chunk-NQ4HTGF6.js";
 
 // node_modules/@angular/cdk/fesm2022/table.mjs
+var import_rxjs = __toESM(require_cjs(), 1);
+var import_operators = __toESM(require_operators(), 1);
 var _c0 = [[["caption"]], [["colgroup"], ["col"]], "*"];
 var _c1 = ["caption", "colgroup, col", "*"];
 function CdkTable_Conditional_2_Template(rf, ctx) {
@@ -1662,7 +1662,7 @@ var CdkTable = class _CdkTable {
     this._coalescedStyleScheduler = _coalescedStyleScheduler;
     this._viewportRuler = _viewportRuler;
     this._stickyPositioningListener = _stickyPositioningListener;
-    this._onDestroy = new Subject();
+    this._onDestroy = new import_rxjs.Subject();
     this._columnDefsByName = /* @__PURE__ */ new Map();
     this._customColumnDefs = /* @__PURE__ */ new Set();
     this._customRowDefs = /* @__PURE__ */ new Set();
@@ -1682,7 +1682,7 @@ var CdkTable = class _CdkTable {
     this._multiTemplateDataRows = false;
     this._fixedLayout = false;
     this.contentChanged = new EventEmitter();
-    this.viewChange = new BehaviorSubject({
+    this.viewChange = new import_rxjs.BehaviorSubject({
       start: 0,
       end: Number.MAX_VALUE
     });
@@ -1699,7 +1699,7 @@ var CdkTable = class _CdkTable {
     this._dataDiffer = this._differs.find([]).create((_i, dataRow) => {
       return this.trackBy ? this.trackBy(dataRow.dataIndex, dataRow.data) : dataRow;
     });
-    this._viewportRuler.change().pipe(takeUntil(this._onDestroy)).subscribe(() => {
+    this._viewportRuler.change().pipe((0, import_operators.takeUntil)(this._onDestroy)).subscribe(() => {
       this._forceRecalculateCellWidths = true;
     });
   }
@@ -2038,15 +2038,15 @@ var CdkTable = class _CdkTable {
     let dataStream;
     if (isDataSource(this.dataSource)) {
       dataStream = this.dataSource.connect(this);
-    } else if (isObservable(this.dataSource)) {
+    } else if ((0, import_rxjs.isObservable)(this.dataSource)) {
       dataStream = this.dataSource;
     } else if (Array.isArray(this.dataSource)) {
-      dataStream = of(this.dataSource);
+      dataStream = (0, import_rxjs.of)(this.dataSource);
     }
     if (dataStream === void 0 && (typeof ngDevMode === "undefined" || ngDevMode)) {
       throw getTableUnknownDataSourceError();
     }
-    this._renderChangeSubscription = dataStream.pipe(takeUntil(this._onDestroy)).subscribe((data) => {
+    this._renderChangeSubscription = dataStream.pipe((0, import_operators.takeUntil)(this._onDestroy)).subscribe((data) => {
       this._data = data || [];
       this.renderRows();
     });
@@ -2221,7 +2221,7 @@ var CdkTable = class _CdkTable {
   _setupStickyStyler() {
     const direction = this._dir ? this._dir.value : "ltr";
     this._stickyStyler = new StickyStyler(this._isNativeHtmlTable, this.stickyCssClass, direction, this._coalescedStyleScheduler, this._platform.isBrowser, this.needsPositionStickyOnElement, this._stickyPositioningListener);
-    (this._dir ? this._dir.change : of()).pipe(takeUntil(this._onDestroy)).subscribe((value) => {
+    (this._dir ? this._dir.change : (0, import_rxjs.of)()).pipe((0, import_operators.takeUntil)(this._onDestroy)).subscribe((value) => {
       this._stickyStyler.direction = value;
       this.updateStickyColumnStyles();
     });
@@ -2704,6 +2704,8 @@ var CdkTableModule = class _CdkTableModule {
 })();
 
 // node_modules/@angular/material/fesm2022/table.mjs
+var import_rxjs2 = __toESM(require_cjs(), 1);
+var import_operators2 = __toESM(require_operators(), 1);
 var _c02 = [[["caption"]], [["colgroup"], ["col"]], "*"];
 var _c12 = ["caption", "colgroup, col", "*"];
 function MatTable_Conditional_2_Template(rf, ctx) {
@@ -3756,9 +3758,9 @@ var MatTableDataSource = class extends DataSource {
   }
   constructor(initialData = []) {
     super();
-    this._renderData = new BehaviorSubject([]);
-    this._filter = new BehaviorSubject("");
-    this._internalPageChanges = new Subject();
+    this._renderData = new import_rxjs2.BehaviorSubject([]);
+    this._filter = new import_rxjs2.BehaviorSubject("");
+    this._internalPageChanges = new import_rxjs2.Subject();
     this._renderChangesSubscription = null;
     this.sortingDataAccessor = (data, sortHeaderId) => {
       const value = data[sortHeaderId];
@@ -3809,7 +3811,7 @@ var MatTableDataSource = class extends DataSource {
       const transformedFilter = filter.trim().toLowerCase();
       return dataStr.indexOf(transformedFilter) != -1;
     };
-    this._data = new BehaviorSubject(initialData);
+    this._data = new import_rxjs2.BehaviorSubject(initialData);
     this._updateChangeSubscription();
   }
   /**
@@ -3818,12 +3820,12 @@ var MatTableDataSource = class extends DataSource {
    * the provided base data and send it to the table for rendering.
    */
   _updateChangeSubscription() {
-    const sortChange = this._sort ? merge(this._sort.sortChange, this._sort.initialized) : of(null);
-    const pageChange = this._paginator ? merge(this._paginator.page, this._internalPageChanges, this._paginator.initialized) : of(null);
+    const sortChange = this._sort ? (0, import_rxjs2.merge)(this._sort.sortChange, this._sort.initialized) : (0, import_rxjs2.of)(null);
+    const pageChange = this._paginator ? (0, import_rxjs2.merge)(this._paginator.page, this._internalPageChanges, this._paginator.initialized) : (0, import_rxjs2.of)(null);
     const dataStream = this._data;
-    const filteredData = combineLatest([dataStream, this._filter]).pipe(map(([data]) => this._filterData(data)));
-    const orderedData = combineLatest([filteredData, sortChange]).pipe(map(([data]) => this._orderData(data)));
-    const paginatedData = combineLatest([orderedData, pageChange]).pipe(map(([data]) => this._pageData(data)));
+    const filteredData = (0, import_rxjs2.combineLatest)([dataStream, this._filter]).pipe((0, import_operators2.map)(([data]) => this._filterData(data)));
+    const orderedData = (0, import_rxjs2.combineLatest)([filteredData, sortChange]).pipe((0, import_operators2.map)(([data]) => this._orderData(data)));
+    const paginatedData = (0, import_rxjs2.combineLatest)([orderedData, pageChange]).pipe((0, import_operators2.map)(([data]) => this._pageData(data)));
     this._renderChangesSubscription?.unsubscribe();
     this._renderChangesSubscription = paginatedData.subscribe((data) => this._renderData.next(data));
   }

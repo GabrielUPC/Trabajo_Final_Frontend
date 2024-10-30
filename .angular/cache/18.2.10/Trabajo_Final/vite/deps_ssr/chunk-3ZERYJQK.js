@@ -1,11 +1,11 @@
+import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-6EJNABYM.js";
+} from "./chunk-XZSY3JNP.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
-  BehaviorSubject,
   CSP_NONCE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -21,37 +21,21 @@ import {
   LOCALE_ID,
   NgModule,
   NgZone,
-  Observable,
   Optional,
   Output,
   PLATFORM_ID,
   QueryList,
-  Subject,
-  Subscription,
   Version,
   ViewChild,
   ViewEncapsulation$1,
-  __spreadProps,
-  __spreadValues,
   afterNextRender,
   booleanAttribute,
-  combineLatest,
-  concat,
-  debounceTime,
-  distinctUntilChanged,
   effect,
-  filter,
   inject,
-  isObservable,
   isSignal,
-  map,
-  of,
+  require_cjs,
+  require_operators,
   setClassMetadata,
-  skip,
-  startWith,
-  take,
-  takeUntil,
-  tap,
   ɵɵInputTransformsFeature,
   ɵɵNgOnChangesFeature,
   ɵɵProvidersFeature,
@@ -82,7 +66,12 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-ESGFLNDA.js";
+} from "./chunk-TW4XVQZD.js";
+import {
+  __spreadProps,
+  __spreadValues,
+  __toESM
+} from "./chunk-NQ4HTGF6.js";
 
 // node_modules/@angular/cdk/fesm2022/platform.mjs
 var hasV8BreakIterator;
@@ -317,15 +306,22 @@ function coerceElement(elementOrRef) {
   return elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
 }
 
+// node_modules/@angular/cdk/fesm2022/a11y.mjs
+var import_rxjs4 = __toESM(require_cjs(), 1);
+var import_operators3 = __toESM(require_operators(), 1);
+
 // node_modules/@angular/cdk/fesm2022/coercion/private.mjs
+var import_rxjs = __toESM(require_cjs(), 1);
 function coerceObservable(data) {
-  if (!isObservable(data)) {
-    return of(data);
+  if (!(0, import_rxjs.isObservable)(data)) {
+    return (0, import_rxjs.of)(data);
   }
   return data;
 }
 
 // node_modules/@angular/cdk/fesm2022/observers.mjs
+var import_rxjs2 = __toESM(require_cjs(), 1);
+var import_operators = __toESM(require_operators(), 1);
 function shouldIgnoreRecord(record) {
   if (record.type === "characterData" && record.target instanceof Comment) {
     return true;
@@ -381,9 +377,9 @@ var ContentObserver = class _ContentObserver {
   }
   observe(elementOrRef) {
     const element = coerceElement(elementOrRef);
-    return new Observable((observer) => {
+    return new import_rxjs2.Observable((observer) => {
       const stream = this._observeElement(element);
-      const subscription = stream.pipe(map((records) => records.filter((record) => !shouldIgnoreRecord(record))), filter((records) => !!records.length)).subscribe((records) => {
+      const subscription = stream.pipe((0, import_operators.map)((records) => records.filter((record) => !shouldIgnoreRecord(record))), (0, import_operators.filter)((records) => !!records.length)).subscribe((records) => {
         this._ngZone.run(() => {
           observer.next(records);
         });
@@ -401,7 +397,7 @@ var ContentObserver = class _ContentObserver {
   _observeElement(element) {
     return this._ngZone.runOutsideAngular(() => {
       if (!this._observedElements.has(element)) {
-        const stream = new Subject();
+        const stream = new import_rxjs2.Subject();
         const observer = this._mutationObserverFactory.create((mutations) => stream.next(mutations));
         if (observer) {
           observer.observe(element, {
@@ -508,7 +504,7 @@ var CdkObserveContent = class _CdkObserveContent {
   _subscribe() {
     this._unsubscribe();
     const stream = this._contentObserver.observe(this._elementRef);
-    this._currentSubscription = (this.debounce ? stream.pipe(debounceTime(this.debounce)) : stream).subscribe(this.event);
+    this._currentSubscription = (this.debounce ? stream.pipe((0, import_operators.debounceTime)(this.debounce)) : stream).subscribe(this.event);
   }
   _unsubscribe() {
     this._currentSubscription?.unsubscribe();
@@ -595,6 +591,8 @@ var ObserversModule = class _ObserversModule {
 })();
 
 // node_modules/@angular/cdk/fesm2022/layout.mjs
+var import_rxjs3 = __toESM(require_cjs(), 1);
+var import_operators2 = __toESM(require_operators(), 1);
 var LayoutModule = class _LayoutModule {
   static {
     this.ɵfac = function LayoutModule_Factory(__ngFactoryType__) {
@@ -707,7 +705,7 @@ var BreakpointObserver = class _BreakpointObserver {
     this._mediaMatcher = _mediaMatcher;
     this._zone = _zone;
     this._queries = /* @__PURE__ */ new Map();
-    this._destroySubject = new Subject();
+    this._destroySubject = new import_rxjs3.Subject();
   }
   /** Completes the active subject, signalling to all other observables to complete. */
   ngOnDestroy() {
@@ -732,9 +730,9 @@ var BreakpointObserver = class _BreakpointObserver {
   observe(value) {
     const queries = splitQueries(coerceArray(value));
     const observables = queries.map((query) => this._registerQuery(query).observable);
-    let stateObservable = combineLatest(observables);
-    stateObservable = concat(stateObservable.pipe(take(1)), stateObservable.pipe(skip(1), debounceTime(0)));
-    return stateObservable.pipe(map((breakpointStates) => {
+    let stateObservable = (0, import_rxjs3.combineLatest)(observables);
+    stateObservable = (0, import_rxjs3.concat)(stateObservable.pipe((0, import_operators2.take)(1)), stateObservable.pipe((0, import_operators2.skip)(1), (0, import_operators2.debounceTime)(0)));
+    return stateObservable.pipe((0, import_operators2.map)((breakpointStates) => {
       const response = {
         matches: false,
         breakpoints: {}
@@ -755,18 +753,18 @@ var BreakpointObserver = class _BreakpointObserver {
       return this._queries.get(query);
     }
     const mql = this._mediaMatcher.matchMedia(query);
-    const queryObservable = new Observable((observer) => {
+    const queryObservable = new import_rxjs3.Observable((observer) => {
       const handler = (e) => this._zone.run(() => observer.next(e));
       mql.addListener(handler);
       return () => {
         mql.removeListener(handler);
       };
-    }).pipe(startWith(mql), map(({
+    }).pipe((0, import_operators2.startWith)(mql), (0, import_operators2.map)(({
       matches
     }) => ({
       query,
       matches
-    })), takeUntil(this._destroySubject));
+    })), (0, import_operators2.takeUntil)(this._destroySubject));
     const output = {
       observable: queryObservable,
       mql
@@ -1019,11 +1017,11 @@ function setMessageId(element, serviceId) {
 var DEFAULT_TYPEAHEAD_DEBOUNCE_INTERVAL_MS = 200;
 var Typeahead = class {
   constructor(initialItems, config) {
-    this._letterKeyStream = new Subject();
+    this._letterKeyStream = new import_rxjs4.Subject();
     this._items = [];
     this._selectedItemIndex = -1;
     this._pressedLetters = [];
-    this._selectedItem = new Subject();
+    this._selectedItem = new import_rxjs4.Subject();
     this.selectedItem = this._selectedItem;
     const typeAheadInterval = typeof config?.debounceInterval === "number" ? config.debounceInterval : DEFAULT_TYPEAHEAD_DEBOUNCE_INTERVAL_MS;
     if (config?.skipPredicate) {
@@ -1063,7 +1061,7 @@ var Typeahead = class {
     this._pressedLetters = [];
   }
   _setupKeyHandler(typeAheadInterval) {
-    this._letterKeyStream.pipe(tap((letter) => this._pressedLetters.push(letter)), debounceTime(typeAheadInterval), filter(() => this._pressedLetters.length > 0), map(() => this._pressedLetters.join("").toLocaleUpperCase())).subscribe((inputString) => {
+    this._letterKeyStream.pipe((0, import_operators3.tap)((letter) => this._pressedLetters.push(letter)), (0, import_operators3.debounceTime)(typeAheadInterval), (0, import_operators3.filter)(() => this._pressedLetters.length > 0), (0, import_operators3.map)(() => this._pressedLetters.join("").toLocaleUpperCase())).subscribe((inputString) => {
       for (let i = 1; i < this._items.length + 1; i++) {
         const index = (this._selectedItemIndex + i) % this._items.length;
         const item = this._items[index];
@@ -1082,7 +1080,7 @@ var ListKeyManager = class {
     this._activeItemIndex = -1;
     this._activeItem = null;
     this._wrap = false;
-    this._typeaheadSubscription = Subscription.EMPTY;
+    this._typeaheadSubscription = import_rxjs4.Subscription.EMPTY;
     this._vertical = true;
     this._allowedModifierKeys = [];
     this._homeAndEnd = false;
@@ -1091,8 +1089,8 @@ var ListKeyManager = class {
       delta: 10
     };
     this._skipPredicateFn = (item) => item.disabled;
-    this.tabOut = new Subject();
-    this.change = new Subject();
+    this.tabOut = new import_rxjs4.Subject();
+    this.change = new import_rxjs4.Subject();
     if (_items instanceof QueryList) {
       this._itemChangesSubscription = _items.changes.subscribe((newItems) => this._itemsChanged(newItems.toArray()));
     } else if (isSignal(_items)) {
@@ -1459,9 +1457,9 @@ var TreeKeyManager = class {
     this._skipPredicateFn = (_item) => false;
     this._trackByFn = (item) => item;
     this._items = [];
-    this._typeaheadSubscription = Subscription.EMPTY;
+    this._typeaheadSubscription = import_rxjs4.Subscription.EMPTY;
     this._hasInitialFocused = false;
-    this.change = new Subject();
+    this.change = new import_rxjs4.Subject();
     if (items instanceof QueryList) {
       this._items = items.toArray();
       items.changes.subscribe((newItems) => {
@@ -1470,7 +1468,7 @@ var TreeKeyManager = class {
         this._updateActiveItemIndex(this._items);
         this._initializeFocus();
       });
-    } else if (isObservable(items)) {
+    } else if ((0, import_rxjs4.isObservable)(items)) {
       items.subscribe((newItems) => {
         this._items = newItems;
         this._typeahead?.setItems(newItems);
@@ -1655,7 +1653,7 @@ var TreeKeyManager = class {
     if (!this._isCurrentItemExpanded()) {
       this._activeItem.expand();
     } else {
-      coerceObservable(this._activeItem.getChildren()).pipe(take(1)).subscribe((children) => {
+      coerceObservable(this._activeItem.getChildren()).pipe((0, import_operators3.take)(1)).subscribe((children) => {
         const firstChild = children.find((child) => !this._skipPredicateFn(child));
         if (!firstChild) {
           return;
@@ -1681,11 +1679,11 @@ var TreeKeyManager = class {
     const parent = this._activeItem.getParent();
     let itemsToExpand;
     if (!parent) {
-      itemsToExpand = of(this._items.filter((item) => item.getParent() === null));
+      itemsToExpand = (0, import_rxjs4.of)(this._items.filter((item) => item.getParent() === null));
     } else {
       itemsToExpand = coerceObservable(parent.getChildren());
     }
-    itemsToExpand.pipe(take(1)).subscribe((items) => {
+    itemsToExpand.pipe((0, import_operators3.take)(1)).subscribe((items) => {
       for (const item of items) {
         item.expand();
       }
@@ -2465,7 +2463,7 @@ var InputModalityDetector = class _InputModalityDetector {
   constructor(_platform, ngZone, document2, options) {
     this._platform = _platform;
     this._mostRecentTarget = null;
-    this._modality = new BehaviorSubject(null);
+    this._modality = new import_rxjs4.BehaviorSubject(null);
     this._lastTouchMs = 0;
     this._onKeydown = (event) => {
       if (this._options?.ignoreKeys?.some((keyCode) => keyCode === event.keyCode)) {
@@ -2491,8 +2489,8 @@ var InputModalityDetector = class _InputModalityDetector {
       this._mostRecentTarget = _getEventTarget(event);
     };
     this._options = __spreadValues(__spreadValues({}, INPUT_MODALITY_DETECTOR_DEFAULT_OPTIONS), options);
-    this.modalityDetected = this._modality.pipe(skip(1));
-    this.modalityChanged = this.modalityDetected.pipe(distinctUntilChanged());
+    this.modalityDetected = this._modality.pipe((0, import_operators3.skip)(1));
+    this.modalityChanged = this.modalityDetected.pipe((0, import_operators3.distinctUntilChanged)());
     if (_platform.isBrowser) {
       ngZone.runOutsideAngular(() => {
         document2.addEventListener("keydown", this._onKeydown, modalityEventListenerOptions);
@@ -2801,7 +2799,7 @@ var FocusMonitor = class _FocusMonitor {
       this._windowFocused = true;
       this._windowFocusTimeoutId = window.setTimeout(() => this._windowFocused = false);
     };
-    this._stopInputModalityDetector = new Subject();
+    this._stopInputModalityDetector = new import_rxjs4.Subject();
     this._rootNodeFocusAndBlurListener = (event) => {
       const target = _getEventTarget(event);
       for (let element = target; element; element = element.parentElement) {
@@ -2818,7 +2816,7 @@ var FocusMonitor = class _FocusMonitor {
   monitor(element, checkChildren = false) {
     const nativeElement = coerceElement(element);
     if (!this._platform.isBrowser || nativeElement.nodeType !== 1) {
-      return of();
+      return (0, import_rxjs4.of)();
     }
     const rootNode = _getShadowRoot(nativeElement) || this._getDocument();
     const cachedInfo = this._elementInfo.get(nativeElement);
@@ -2830,7 +2828,7 @@ var FocusMonitor = class _FocusMonitor {
     }
     const info = {
       checkChildren,
-      subject: new Subject(),
+      subject: new import_rxjs4.Subject(),
       rootNode
     };
     this._elementInfo.set(nativeElement, info);
@@ -2977,7 +2975,7 @@ var FocusMonitor = class _FocusMonitor {
         const window2 = this._getWindow();
         window2.addEventListener("focus", this._windowFocusListener);
       });
-      this._inputModalityDetector.modalityDetected.pipe(takeUntil(this._stopInputModalityDetector)).subscribe((modality) => {
+      this._inputModalityDetector.modalityDetected.pipe((0, import_operators3.takeUntil)(this._stopInputModalityDetector)).subscribe((modality) => {
         this._setOrigin(
           modality,
           true
@@ -3447,6 +3445,8 @@ var BidiModule = class _BidiModule {
 var VERSION = new Version("18.2.10");
 
 // node_modules/@angular/material/fesm2022/core.mjs
+var import_rxjs5 = __toESM(require_cjs(), 1);
+var import_operators4 = __toESM(require_operators(), 1);
 var _c0 = ["*", [["mat-option"], ["ng-container"]]];
 var _c1 = ["*", "mat-option, ng-container"];
 var _c2 = ["text"];
@@ -3626,7 +3626,7 @@ function MAT_DATE_LOCALE_FACTORY() {
 }
 var DateAdapter = class {
   constructor() {
-    this._localeChanges = new Subject();
+    this._localeChanges = new import_rxjs5.Subject();
     this.localeChanges = this._localeChanges;
   }
   /**
@@ -4899,7 +4899,7 @@ var MatOption = class _MatOption {
     this._mostRecentViewValue = "";
     this.id = `mat-option-${_uniqueIdCounter++}`;
     this.onSelectionChange = new EventEmitter();
-    this._stateChanges = new Subject();
+    this._stateChanges = new import_rxjs5.Subject();
   }
   /**
    * Whether or not the option is currently active and ready to be selected.
@@ -5462,6 +5462,7 @@ export {
   BidiModule,
   MatCommonModule,
   MatRipple,
-  MatRippleModule
+  MatRippleModule,
+  MatRippleLoader
 };
-//# sourceMappingURL=chunk-PM2OGMVF.js.map
+//# sourceMappingURL=chunk-3ZERYJQK.js.map

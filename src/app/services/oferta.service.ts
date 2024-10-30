@@ -12,6 +12,5 @@ export class OfertaService {
   constructor(private http:HttpClient) { }
   list(){
     return this.http.get<Oferta[]>(this.url);
-
   }
 }

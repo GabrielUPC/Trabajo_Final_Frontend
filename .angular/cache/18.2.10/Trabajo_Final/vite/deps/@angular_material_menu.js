@@ -10,7 +10,7 @@ import {
   ScrollDispatcher,
   ScrollingModule,
   ViewportRuler
-} from "./chunk-6INKTGMH.js";
+} from "./chunk-PHJWNJQI.js";
 import {
   BidiModule,
   DOWN_ARROW,
@@ -36,7 +36,7 @@ import {
   isFakeTouchstartFromScreenReader,
   normalizePassiveListenerOptions,
   supportsScrollBehavior
-} from "./chunk-PM2OGMVF.js";
+} from "./chunk-UDYKGLG5.js";
 import {
   CommonModule,
   DOCUMENT,
