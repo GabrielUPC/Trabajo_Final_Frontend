@@ -1,0 +1,39 @@
+<div>
+    <div><h1>Titulo</h1></div>
+    <div>
+        <form>
+            <mat-form-field class="example-full-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Ingrese el nombre" matInput [formControl]="nombreFormControl" [errorStateMatcher]="matcher"
+              placeholder="Ingrese la descripción">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Descripción</mat-label>
+                <input type="descripcion" matInput [formControl]="descripcionFormControl" [errorStateMatcher]="matcher"
+                       placeholder="Ingrese la descripción">
+                <mat-hint>Errors appear instantly!</mat-hint>
+                @if (descripcionFormControl.hasError('descripcion') && !descripcionFormControl.hasError('required')) {
+                  <mat-error>Por favor ingrese una descripción</mat-error>
+                }
+                @if (descripcionFormControl.hasError('required')) {
+                  <mat-error>Descripcion is <strong>required</strong></mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Direccion</mat-label>
+                <input type="direccion" matInput [formControl]="direccionFormControl" [errorStateMatcher]="matcher"
+                       placeholder="Ingrese la direccion">
+                <mat-hint>Errors appear instantly!</mat-hint>
+                @if (direccionFormControl.hasError('direccion') && !direccionFormControl.hasError('required')) {
+                  <mat-error>Por favor ingrese una direccion</mat-error>
+                }
+                @if (direccionFormControl.hasError('required')) {
+                  <mat-error>Direccion is <strong>required</strong></mat-error>
+                }
+              </mat-form-field>
+
+        </form>
+    </div>
+</div>
