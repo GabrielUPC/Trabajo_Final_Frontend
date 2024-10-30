@@ -1,0 +1,36 @@
+<div class="container mt-4" >
+    <div class="text-center mb-4">
+      <h1>Lista de Carritos </h1>
+  </div>
+      <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+          <ng-container matColumnDef="c1">
+            <th mat-header-cell *matHeaderCellDef> Id_Carrito </th>
+            <td mat-cell *matCellDef="let element"> {{element.idCarrito}} </td>
+          </ng-container>
+        
+      
+          <ng-container matColumnDef="c2">
+            <th mat-header-cell *matHeaderCellDef> Cantidad del Carrito </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidadCarrito}} </td>
+          </ng-container>
+        
+        
+          <ng-container matColumnDef="c3">
+            <th mat-header-cell *matHeaderCellDef> Precio Total </th>
+            <td mat-cell *matCellDef="let element"> {{element.precioTotalCarrito}} </td>
+          </ng-container>
+        
+         
+          <ng-container matColumnDef="c4">
+            <th mat-header-cell *matHeaderCellDef> Estado del Carrito </th>
+            <td mat-cell *matCellDef="let element"> {{element.estadoCarrito}} </td>
+          </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+  </div>

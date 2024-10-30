@@ -5,6 +5,7 @@ import { OfertaComponent } from "./components/oferta/oferta.component";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   imports: [RouterOutlet, 
     UsuarioComponent, 
     OfertaComponent,MatMenuModule,MatIconModule,
-    MatToolbarModule],
+    MatToolbarModule,CarritoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,5 +1,12 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-5TFL2EVI.js";
+import {
   CdkScrollableModule,
   ScrollDispatcher,
   ScrollingModule,
@@ -31,13 +38,6 @@ import {
   normalizePassiveListenerOptions,
   supportsScrollBehavior
 } from "./chunk-7WNPV7HO.js";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-5TFL2EVI.js";
 import {
   CommonModule,
   DOCUMENT,
