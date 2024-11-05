@@ -1,4 +1,35 @@
+<mat-toolbar class="custom-toolbar" >
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuUsuario" style="color: white;"><mat-icon >menu</mat-icon>Usuario</button>
+    </div>
+    
+    <div>
+        <button mat-button [matMenuTriggerFor]="menuOfertas" style="color: white;" ><mat-icon> local_offer</mat-icon>Ofertas</button>
+    </div>
+    <div>
+        <button mat-button [matMenuTriggerFor]="menuTiendas" style="color: white;" ><mat-icon>store</mat-icon>Tiendas</button>
+    </div>
+    <div>
+        <button mat-button [matMenuTriggerFor]="menuCarrtios" style="color: white;" ><mat-icon>shopping_cart</mat-icon>Carritos</button>
+    </div>
+</mat-toolbar>
+  
+    <mat-menu #menuUsuario="matMenu">
+    <button mat-menu-item routerLink="/usuarios" >Listar</button>
+    <button mat-menu-item routerLink="/usuarios/nuevo" >Registrar</button>
+    </mat-menu>
+    <mat-menu #menuOfertas="matMenu">
+    <button mat-menu-item routerLink="/ofertas" >Listar</button>
+    <button mat-menu-item routerLink="/ofertas/nuevo" >Registrar</button>
+    </mat-menu>
+    <mat-menu #menuTiendas="matMenu">
+      <button mat-menu-item routerLink="/tiendas" >Listar</button>
+      <button mat-menu-item routerLink="/tiendas/nuevo" >Registrar</button>
+    </mat-menu>
+    <mat-menu #menuCarrtios="matMenu">
+        <button mat-menu-item routerLink="/carritos" >Listar</button>
+        <button mat-menu-item routerLink="/carritos/nuevo" >Registrar</button>
+    </mat-menu>
+   <router-outlet></router-outlet>
 
-<app-usuario></app-usuario>
-
-<app-oferta></app-oferta>
+  
