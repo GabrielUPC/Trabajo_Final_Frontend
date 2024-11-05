@@ -1,15 +1,9 @@
-.custom-toolbar {
+.custom-toolbar{
+  background-color: rgb(8,138 ,95);
+  color: white;
+}
 
-  background-color: #226c7f; 
-
-  color: white; 
-
- }
-
-
-
- .custom-menu-item {  
-
+.custom-menu-item{
   color: white; 
 
   &:hover {
@@ -17,5 +11,4 @@
    color: white; 
 
   }
-
- }
+}

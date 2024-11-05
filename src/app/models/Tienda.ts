@@ -1,5 +1,5 @@
 export class Tienda{
-    idTiendas:number=0
+    idTienda:number=0
     nombre:string=""
     descripcion:string=""
     direccion:string=""
