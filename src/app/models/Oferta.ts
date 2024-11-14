@@ -3,6 +3,5 @@ export class Oferta{
     nombreOferta:string=""
     fechaInicio:Date = new Date(Date.now())
     fechaFin:Date = new Date(Date.now())
-    cantidadProductos:number=0
-   
+    cantidad:number=0
 }

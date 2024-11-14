@@ -1,0 +1,75 @@
+<div>
+    <div  class="text-center mb-4">
+        <h1>Registro de Productos</h1>
+    </div>
+    <div class="text-center mb-4">
+        <form [formGroup]="form" (submit)="insertar()">
+        <mat-form-field class="example-full-width" *ngIf="edicion">
+          <mat-label>Codigo</mat-label>
+          <input matInput formControlName="hcodigo">
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Leche" formControlName="hnombre">
+          </mat-form-field>
+          <br/>
+        <mat-form-field class="example-full-width">
+            <mat-label>Descripcion</mat-label>
+            <textarea matInput placeholder="Descripcion" formControlName="hdescripcion"></textarea>
+          </mat-form-field>
+          <br/>
+          <mat-form-field class="example-full-width">
+            <mat-label>Precio</mat-label>
+            <input matInput formControlName="hprecio">
+          </mat-form-field>
+          <br/>
+          <mat-form-field class="example-full-width">
+            <mat-label>Estado</mat-label>
+            <input matInput formControlName="hestado">
+          </mat-form-field>
+          <br/>
+        <mat-form-field>
+            <mat-label>Fecha de Vencimiento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="hfechavencimiento">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <br/>      
+        <mat-form-field class="example-full-width">
+            <mat-label>Stock</mat-label>
+            <input matInput formControlName="hstock">
+          </mat-form-field>
+          <br/>
+        <mat-form-field>
+          <mat-label>Usuario</mat-label>
+          <mat-select  formControlName="husuario">
+            @for (food of listaUsuarios; track food) {
+            <mat-option [value]="food.idUsuario">{{ food.nombre }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+            <mat-label>Tienda</mat-label>
+            <mat-select  formControlName="htienda">
+              @for (food of listaTiendas; track food) {
+              <mat-option [value]="food.idTienda">{{ food.nombre }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <mat-label>Oferta</mat-label>
+            <mat-select  formControlName="hoferta">
+              @for (food of listaOfertas; track food) {
+              <mat-option [value]="food.idOferta">{{ food.nombreOferta }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        <br/>
+       <div><button mat-flat-button>Registrar</button></div>
+      </form>
+      </div>
+</div>

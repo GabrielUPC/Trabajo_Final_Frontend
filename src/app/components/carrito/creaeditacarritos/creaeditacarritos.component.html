@@ -1,6 +1,6 @@
 <div>
     <div  class="text-center mb-4">
-        <h1>Registro de Usuarios</h1>
+        <h1>Registro de carritos</h1>
     </div>
     <div  class="text-center mb-4">
         <form [formGroup]="formCarrito" (submit)="insertar()">
@@ -8,16 +8,6 @@
           <mat-form-field class="example-full-width" *ngIf="edicion">
             <mat-label>Codigo</mat-label>
             <input matInput formControlName="hcodigo">
-          </mat-form-field>
-          <br/>
-        <mat-form-field class="example-full-width">
-          <mat-label>Cantidad</mat-label>
-          <input matInput  formControlName="hcantidad">
-        </mat-form-field>
-        <br/>
-        <mat-form-field class="example-full-width">
-            <mat-label>Precio</mat-label>
-            <input matInput formControlName="hprecio">
           </mat-form-field>
           <br/>
         <mat-form-field class="example-full-width">

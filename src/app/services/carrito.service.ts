@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Carrito } from '../models/Carrito';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
-import { Oferta } from '../models/Oferta';
 const base_url=environment.base
 @Injectable({
   providedIn: 'root'
