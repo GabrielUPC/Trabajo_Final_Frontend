@@ -14,6 +14,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-creaeditausuarios',
@@ -23,8 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatInputModule,
     CommonModule,
-    MatButtonModule
-   
+    MatButtonModule,
+    MatFormFieldModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './creaeditausuarios.component.html',
@@ -49,11 +50,11 @@ export class CreaeditausuariosComponent implements OnInit {
     });//usar para editar
     this.form = this.formbuilder.group({
       hcodigo: [''],
-      hdni: ['', Validators.required],
+      hdni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       hnombre: ['', Validators.required],
       hdireccion: ['', Validators.required],
-      hcorreo: ['', Validators.required],
-      htelefono: ['', Validators.required],
+      hcorreo: ['', [Validators.required, Validators.email]],
+      htelefono: ['', [Validators.required,Validators.pattern('^[0-9]{9}$')]],
       husername: ['', Validators.required],
     });
   }
@@ -88,7 +89,10 @@ export class CreaeditausuariosComponent implements OnInit {
       this.us.listId(this.id).subscribe(data=> {
         this.form = new FormGroup({
           hcodigo: new FormControl(data.idUsuario),
-          hdni: new FormControl(data.dni),
+          hdni: new FormControl(data.dni,[
+            Validators.required,
+            Validators.pattern('^[0-9]{8}$'),
+          ]),
           hnombre: new FormControl(data.nombre),
           hcorreo: new FormControl(data.correo),
           hdireccion: new FormControl(data.direccion),
