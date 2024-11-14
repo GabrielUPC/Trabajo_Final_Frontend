@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../models/Oferta';
 import { Subject } from 'rxjs';
 const base_url=environment.base
@@ -9,7 +9,7 @@ const base_url=environment.base
 })
 export class OfertaService {
   private url= `${base_url}/ofertas`
-  private listaCambio=new Subject<Oferta[]>()
+  listaCambio=new Subject<Oferta[]>()
   constructor(private http:HttpClient) { }
   list(){
     return this.http.get<Oferta[]>(this.url);

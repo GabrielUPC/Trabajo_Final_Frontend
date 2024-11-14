@@ -1,0 +1,40 @@
+<div>
+    <div  class="text-center mb-4">
+        <h1>Registro de compras</h1>
+    </div>
+    <div class="text-center mb-4">
+        <form [formGroup]="form" (submit)="insertar()">
+        <mat-form-field class="example-full-width" *ngIf="edicion">
+          <mat-label>Codigo</mat-label>
+          <input matInput formControlName="hcodigo">
+        </mat-form-field>
+        <br/>
+        
+        <mat-form-field class="example-full-width" >
+            <mat-label>Cantidad</mat-label>
+            <input matInput formControlName="hcantidad">
+          </mat-form-field>
+          <br/>
+        
+          <mat-form-field>
+            <mat-label>Productos</mat-label>
+            <mat-select  formControlName="hproductos">
+              @for (food of listaproductos; track food) {
+              <mat-option [value]="food.idProducto">{{ food.nombreProducto }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <mat-label>Carrito</mat-label>
+            <mat-select  formControlName="hcarritos">
+              @for (food of listacarritos; track food) {
+              <mat-option [value]="food.id">{{ food.id }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        <br/>
+       <div><button mat-flat-button>Registrar</button></div>
+      </form>
+      </div>
+</div>

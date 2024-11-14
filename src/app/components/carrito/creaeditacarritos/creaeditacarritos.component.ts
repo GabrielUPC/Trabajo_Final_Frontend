@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Carrito } from '../../../models/Carrito';
@@ -35,17 +34,13 @@ export class CreaeditacarritosComponent implements OnInit{
     })
     this.formCarrito=this.formbuilder.group({
       hcodigo:[''],
-      hcantidad:['',Validators.required],
-      hprecio:['',Validators.required],
       hestado:['',Validators.required]
     })
   }
   insertar():void{
     if(this.formCarrito.valid){
-      this.carrito.idCarrito=this.formCarrito.value.hcodigo
-      this.carrito.cantidadCarrito=this.formCarrito.value.hcantidad
-      this.carrito.precioTotalCarrito=this.formCarrito.value.hprecio
-      this.carrito.estadoCarrito=this.formCarrito.value.hestado
+      this.carrito.id=this.formCarrito.value.hcodigo
+      this.carrito.estado=this.formCarrito.value.hestado
       if(this.edicion){
         this.cs.update(this.carrito).subscribe(data=>{
           this.cs.list().subscribe(data=>{
@@ -62,5 +57,16 @@ export class CreaeditacarritosComponent implements OnInit{
       }
     }
     this.router.navigate(['carritos'])
+  }
+  init() {
+    if (this.edicion) {
+      this.cs.listId(this.id).subscribe((data) => {
+        this.formCarrito = new FormGroup({
+          hcodigo: new FormControl(data.id),
+          hestado: new FormControl(data.estado),
+      
+        });
+      });
+    }
   }
 }

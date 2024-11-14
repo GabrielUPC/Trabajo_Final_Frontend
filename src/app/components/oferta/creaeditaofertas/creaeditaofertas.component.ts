@@ -37,7 +37,8 @@ export class CreaeditaofertasComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
-      this.edicion = data['id'] != null;
+      this.edicion = data['id']!= null;
+      this.init()
     });
     this.form = this.formbuilder.group({
       hcodigo: [''],
@@ -53,7 +54,7 @@ export class CreaeditaofertasComponent implements OnInit {
       this.oferta.nombreOferta = this.form.value.hnombre
       this.oferta.fechaInicio = this.form.value.hfechaInicio
       this.oferta.fechaFin = this.form.value.hfechaFin
-      this.oferta.cantidadProductos = this.form.value.hcantidad;
+      this.oferta.cantidad = this.form.value.hcantidad;
 
       if (this.edicion) {
         this.os.update(this.oferta).subscribe((data) => {
@@ -79,7 +80,7 @@ export class CreaeditaofertasComponent implements OnInit {
           hnombre:new FormControl(data.nombreOferta),
           hfechaInicio:new FormControl(data.fechaInicio),
           hfechaFin:new FormControl(data.fechaFin),
-          hcantidad:new FormControl(data.cantidadProductos)
+          hcantidad:new FormControl(data.cantidad)
         })
       })
     }

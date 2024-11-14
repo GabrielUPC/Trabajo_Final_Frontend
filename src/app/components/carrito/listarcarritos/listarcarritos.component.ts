@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ListarcarritosComponent implements OnInit {
   dataSource:MatTableDataSource<Carrito>=new MatTableDataSource();
-  displayedColumns:string[]=['c1','c2','c3','c4','accion1','accion2']
+  displayedColumns:string[]=['c1','c2','accion1','accion2']
   constructor(private cS:CarritoService){}
   ngOnInit(): void {
     this.cS.list().subscribe((data)=>{

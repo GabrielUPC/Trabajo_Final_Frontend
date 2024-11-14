@@ -1,0 +1,42 @@
+<div>
+    <div  class="text-center mb-4">
+        <h1>Registro de Reviews</h1>
+    </div>
+    <div class="text-center mb-4">
+        <form [formGroup]="form" (submit)="insertar()">
+        <mat-form-field class="example-full-width" *ngIf="edicion">
+          <mat-label>Codigo</mat-label>
+          <input matInput formControlName="hcodigo">
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="example-full-width">
+          <mat-label>Calificacion</mat-label>
+          <input matInput formControlName="hcalificacion">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="hfecha">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <br/>      
+        <mat-form-field class="example-full-width">
+          <mat-label>Comentarios</mat-label>
+          <textarea matInput placeholder="Comentarios" formControlName="hcomentarios"></textarea>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <mat-label>Productos</mat-label>
+          <mat-select  formControlName="hproductos">
+            @for (food of listaProductos; track food) {
+            <mat-option [value]="food.idProducto">{{ food.nombreProducto }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <br/>
+       <div><button mat-flat-button>Registrar</button></div>
+      </form>
+      </div>
+</div>

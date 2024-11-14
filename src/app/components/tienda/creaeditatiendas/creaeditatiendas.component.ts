@@ -46,6 +46,7 @@ export class CreaeditatiendasComponent implements OnInit {
       this.init()
     })
     this.form= this.formbuilder.group({
+      hcodigo:[''],
       hnombre:['',Validators.required],
       hdescripcion:['',Validators.required],
       hdireccion:['',Validators.required]
@@ -53,6 +54,7 @@ export class CreaeditatiendasComponent implements OnInit {
   }
   insertar():void{
     if(this.form.valid){
+      this.tienda.idTienda=this.form.value.hcodigo;
       this.tienda.nombre=this.form.value.hnombre;
       this.tienda.descripcion=this.form.value.hdescripcion;
       this.tienda.direccion=this.form.value.hdireccion;
