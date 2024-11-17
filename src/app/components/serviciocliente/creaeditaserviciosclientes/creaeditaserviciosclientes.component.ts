@@ -46,13 +46,29 @@ export class CreaeditaserviciosclientesComponent implements OnInit{
     this.form = this.formbuilder.group({
       hcodigo: [''],
       hnombre: ['', Validators.required],
-      hfecha: ['', Validators.required],
+      hfecha: [
+        '',
+        [
+          Validators.required,
+          this.maxDateValidator(), // Llamada a la validación personalizada para la fecha máxima
+        ],
+      ],
       hdescripcion: ['', Validators.required],
-      husuarios: ['', Validators.required],
+      
     });
     this.us.list().subscribe((data) => {
       this.listausuarios = data;
     });
+  }
+  maxDateValidator() {
+    const today = new Date();
+    return (control: FormControl) => {
+      const selectedDate = new Date(control.value);
+      if (selectedDate > today) {
+        return { futureDate: true };
+      }
+      return null;
+    };
   }
   insertar(): void {
     if (this.form.valid) {
@@ -60,12 +76,15 @@ export class CreaeditaserviciosclientesComponent implements OnInit{
       this.servicio.nombre = this.form.value.hnombre;
       this.servicio.fechaservicio = this.form.value.hfecha;
       this.servicio.descripcion = this.form.value.hdescripcion;
-      this.servicio.u.idUsuario = this.form.value.husuarios;
+     
 
       if (this.edicion) {
-        this.sc.update(this.servicio).subscribe((data) => {
-          this.sc.list().subscribe((data) => {
-            this.sc.setlist(data);
+        this.sc.listId(this.id).subscribe((data) => {
+          this.servicio.u = data.u; // Recupera el usuario existente
+          this.sc.update(this.servicio).subscribe(() => {
+            this.sc.list().subscribe((data) => {
+              this.sc.setlist(data);
+            });
           });
         });
       } else {
@@ -86,7 +105,6 @@ export class CreaeditaserviciosclientesComponent implements OnInit{
           hnombre: new FormControl(data.nombre),
           hfecha: new FormControl(data.fechaservicio),
           hdescripcion: new FormControl(data.descripcion),
-          husuarios: new FormControl(data.u.idUsuario),
         });
       });
     }

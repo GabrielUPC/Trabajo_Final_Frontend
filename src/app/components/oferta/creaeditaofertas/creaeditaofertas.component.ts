@@ -57,9 +57,12 @@ export class CreaeditaofertasComponent implements OnInit {
       this.oferta.cantidad = this.form.value.hcantidad;
 
       if (this.edicion) {
-        this.os.update(this.oferta).subscribe((data) => {
-          this.os.list().subscribe((data) => {
-            this.os.setlist(data);
+        this.os.listId(this.id).subscribe((data) => {
+          this.oferta.u = data.u; // Recupera el usuario existente
+          this.os.update(this.oferta).subscribe(() => {
+            this.os.list().subscribe((data) => {
+              this.os.setlist(data);
+            });
           });
         });
       } else {

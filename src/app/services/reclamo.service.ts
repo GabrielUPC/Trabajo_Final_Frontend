@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { Reclamo } from '../models/Reclamo';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { LoginService } from './login.service';
 const base_url=environment.base
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,16 @@ const base_url=environment.base
 export class ReclamoService {
   private url= `${base_url}/reclamos`
   listaCambio=new Subject<Reclamo[]>();
-  constructor(private http:HttpClient) { }
-  list(){
-    return this.http.get<Reclamo[]>(this.url);
+  constructor(private http:HttpClient, private loginService: LoginService) { }
+  list() {
+    const role = this.loginService.getUserRole();
+    if (role === 'ADMIN') {
+      return this.http.get<Reclamo[]>(this.url);
+    } else if(role==='COMPRADOR'){
+      return this.http.get<Reclamo[]>(`${this.url}/usuario`);
+    }else{
+      return this.http.get<Reclamo[]>(`${this.url}/vendedor`);
+    }
   }
   insert(re:Reclamo){
     return this.http.post(this.url,re)

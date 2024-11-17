@@ -47,7 +47,13 @@ export class CreaeditareviewsComponent implements OnInit {
     this.form = this.formbuilder.group({
       hcodigo: [''],
       hcalificacion: ['', Validators.required],
-      hfecha: ['', Validators.required],
+      hfecha: [
+        '',
+        [
+          Validators.required,
+          this.maxDateValidator(), // Llamada a la validación personalizada para la fecha máxima
+        ],
+      ],
       hcomentarios: ['', Validators.required],
       hproductos: ['', Validators.required],
     });
@@ -78,6 +84,16 @@ export class CreaeditareviewsComponent implements OnInit {
       }
     }
     this.router.navigate(['reviews']);
+  }
+  maxDateValidator() {
+    const today = new Date();
+    return (control: FormControl) => {
+      const selectedDate = new Date(control.value);
+      if (selectedDate > today) {
+        return { futureDate: true };
+      }
+      return null;
+    };
   }
   init() {
     if (this.edicion) {

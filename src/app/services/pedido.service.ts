@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Pedido } from '../models/Pedido';
 import { HttpClient } from '@angular/common/http';
+import { LoginService } from './login.service';
+import { MontoPedido } from '../models/MontoPedido';
 const base_url=environment.base
 @Injectable({
   providedIn: 'root'
@@ -10,9 +12,16 @@ const base_url=environment.base
 export class PedidoService {
   private url= `${base_url}/pedidos`
   listaCambio=new Subject<Pedido[]>();
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private loginService: LoginService) { }
   list(){
-    return this.http.get<Pedido[]>(this.url);
+    const role = this.loginService.getUserRole();
+    if (role === 'ADMIN') {
+      return this.http.get<Pedido[]>(this.url);
+    } else if(role==='COMPRADOR'){
+      return this.http.get<Pedido[]>(`${this.url}/usuario`);
+    }else{
+      return this.http.get<Pedido[]>(`${this.url}/vendedor`);
+    }
   }
   insert(pe:Pedido){
     return this.http.post(this.url,pe)
@@ -31,5 +40,8 @@ export class PedidoService {
   }
   delete(id:number){
     return this.http.delete(`${this.url}/${id}`)
+  }
+  getMontosPedidos():Observable<MontoPedido[]>{
+    return this.http.get<MontoPedido[]>(`${this.url}/montopedido`)
   }
 }

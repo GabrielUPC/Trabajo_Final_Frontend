@@ -7,11 +7,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Usuario } from '../../../models/Usuario';
-import { Tienda } from '../../../models/Tienda';
+
 import { Oferta } from '../../../models/Oferta';
 import { Productos } from '../../../models/Productos';
 import { UsuarioService } from '../../../services/usuario.service';
-import { TiendaService } from '../../../services/tienda.service';
+
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OfertaService } from '../../../services/oferta.service';
 import { ProductoService } from '../../../services/productos.service';
@@ -33,7 +33,7 @@ import { ProductoService } from '../../../services/productos.service';
 export class CreaeditaproductosComponent {
   form: FormGroup = new FormGroup({});
   listaUsuarios: Usuario[] = [];
-  listaTiendas: Tienda[] = [];
+
   listaOfertas: Oferta[] = [];
   producto: Productos = new Productos();
   edicion: boolean = false;
@@ -41,7 +41,7 @@ export class CreaeditaproductosComponent {
   constructor(
     private formbuilder: FormBuilder,
     private us: UsuarioService,
-    private ts: TiendaService,
+
     private os: OfertaService,
     private Ps: ProductoService,
     private route: ActivatedRoute,
@@ -61,16 +61,9 @@ export class CreaeditaproductosComponent {
       hestado: ['',Validators.required],
       hfechavencimiento: ['', Validators.required],
       hstock: ['', Validators.required],
-      husuario: ['', Validators.required],
-      htienda: ['',Validators.required],
       hoferta: ['', Validators.required]
     });
-    this.us.list().subscribe((data) => {
-      this.listaUsuarios = data;
-    });
-    this.ts.list().subscribe((data) => {
-      this.listaTiendas = data;
-    });
+
     this.os.list().subscribe((data) => {
       this.listaOfertas = data;
     });
@@ -84,14 +77,15 @@ export class CreaeditaproductosComponent {
       this.producto.estadoProducto = this.form.value.hestado;
       this.producto.fechavencimiento = this.form.value.hfechavencimiento;
       this.producto.stockProducto = this.form.value.hstock;
-      this.producto.u.idUsuario = this.form.value.husuario;
-      this.producto.t.idTienda = this.form.value.htienda;
       this.producto.o.idOferta = this.form.value.hoferta;
 
       if (this.edicion) {
-        this.Ps.update(this.producto).subscribe((data) => {
-          this.Ps.list().subscribe((data) => {
-            this.Ps.setlist(data);
+        this.Ps.listId(this.id).subscribe((data) => {
+          this.producto.u = data.u; // Recupera el usuario existente
+          this.Ps.update(this.producto).subscribe(() => {
+            this.Ps.list().subscribe((data) => {
+              this.Ps.setlist(data);
+            });
           });
         });
       } else {
@@ -115,8 +109,6 @@ export class CreaeditaproductosComponent {
           hestado: new FormControl(data.estadoProducto),
           hfechavencimiento: new FormControl(data.fechavencimiento),
           hstock: new FormControl(data.stockProducto),
-          husuario: new FormControl(data.u.idUsuario),
-          htienda: new FormControl(data.t.idTienda),
           hoferta: new FormControl(data.o.idOferta),
         });
       });

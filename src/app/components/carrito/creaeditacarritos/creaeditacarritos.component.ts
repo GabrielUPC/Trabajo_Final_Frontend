@@ -8,6 +8,7 @@ import { Carrito } from '../../../models/Carrito';
 import { CarritoService } from '../../../services/carrito.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-creaeditacarritos',
   standalone: true,
@@ -25,7 +26,7 @@ export class CreaeditacarritosComponent implements OnInit{
     private cs:CarritoService,
     private formbuilder:FormBuilder,
     private router:Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
   ){}
   ngOnInit(): void {
     this.route.params.subscribe((data : Params)=>{
@@ -34,39 +35,19 @@ export class CreaeditacarritosComponent implements OnInit{
     })
     this.formCarrito=this.formbuilder.group({
       hcodigo:[''],
-      hestado:['',Validators.required]
     })
   }
   insertar():void{
     if(this.formCarrito.valid){
       this.carrito.id=this.formCarrito.value.hcodigo
-      this.carrito.estado=this.formCarrito.value.hestado
-      if(this.edicion){
-        this.cs.update(this.carrito).subscribe(data=>{
-          this.cs.list().subscribe(data=>{
-            this.cs.setlist(data)
-          });
-        });
-      }
-      else{
+     
         this.cs.insert(this.carrito).subscribe(data=>{
           this.cs.list().subscribe(data=>{
             this.cs.setlist(data)
           })
         })
-      }
+      
     }
     this.router.navigate(['carritos'])
-  }
-  init() {
-    if (this.edicion) {
-      this.cs.listId(this.id).subscribe((data) => {
-        this.formCarrito = new FormGroup({
-          hcodigo: new FormControl(data.id),
-          hestado: new FormControl(data.estado),
-      
-        });
-      });
-    }
   }
 }

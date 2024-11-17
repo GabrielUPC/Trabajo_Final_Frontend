@@ -27,6 +27,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class CreaeditanotificacionComponent implements OnInit {
   form: FormGroup = new FormGroup({});
+ 
   listausuarios: Usuario[] = [];
   notificacion: Notificacion = new Notificacion();
   edicion: boolean = false;
@@ -53,6 +54,7 @@ export class CreaeditanotificacionComponent implements OnInit {
     this.us.list().subscribe((data) => {
       this.listausuarios = data;
     });
+    
   }
   insertar(): void {
     if (this.form.valid) {

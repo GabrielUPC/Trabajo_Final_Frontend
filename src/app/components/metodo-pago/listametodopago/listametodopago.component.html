@@ -1,5 +1,5 @@
 <div class="container mt-4" >
-    <div class="text-center mb-4">
+    <div class="title text-center mb-4">
       <h1>Lista de Metodos de Pago</h1>
   </div>
       <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded">
@@ -45,5 +45,10 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator
+    [pageSizeOptions]="[4, 7, 10]"
+    showFirstLastButtons
+    aria-label="Paginador de MetodosPago">
+  </mat-paginator>
       </div>
   </div>

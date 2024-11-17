@@ -3,68 +3,69 @@
     <button [routerLink]="['/homes']" class="no-shadow-button" style="background: transparent; border: none;">
       <img src="assets/dtyp.png" width="80px" height="50px" alt="img">
     </button>
-    <button mat-button [matMenuTriggerFor]="menuUsuario" style="color: white;" ><mat-icon>account_box</mat-icon>Usuario</button>
-    <button mat-button [matMenuTriggerFor]="menuTiendas" style="color: white;" *ngIf="isVendedor()||isAdmin()"><mat-icon>store</mat-icon>Tiendas</button>
+    <button mat-button [matMenuTriggerFor]="menuUsuario" style="color: white;"*ngIf="isAdmin()"><mat-icon>account_box</mat-icon>Usuario</button>
+    <button mat-button [matMenuTriggerFor]="menuRoles" style="color: white;"*ngIf="isAdmin()"><mat-icon>assignment_ind</mat-icon>Roles</button>
     <button mat-button [matMenuTriggerFor]="menuServicios" style="color: white;"*ngIf="isComprador()||isAdmin()"><mat-icon >contact_phone</mat-icon>Atencion al Cliente</button>
     <button mat-button [matMenuTriggerFor]="menuReviews" style="color: white;"*ngIf="isComprador()||isAdmin()"><mat-icon> rate_review</mat-icon>Reviews</button>
     <button mat-button [matMenuTriggerFor]="menuReclamos" style="color: white;"*ngIf="isComprador()||isVendedor()" ><mat-icon>receipt</mat-icon>Reclamos</button>
-    <button mat-button [matMenuTriggerFor]="menuProductos" style="color: white;"*ngIf="isVendedor()||isAdmin()"><mat-icon >redeem</mat-icon>Productos</button>
-    <button mat-button [matMenuTriggerFor]="menuPedidos" style="color: white;"*ngIf="isComprador()||isAdmin()"><mat-icon> shop</mat-icon>Pedidos</button>
-    <button mat-button [matMenuTriggerFor]="menuOfertas" style="color: white;"*ngIf="isComprador()||isAdmin()"><mat-icon>local_offer</mat-icon>Ofertas</button>
-    <button mat-button [matMenuTriggerFor]="menuNotificaciones" style="color: white;"*ngIf="isComprador()||isVendedor()"><mat-icon>notifications</mat-icon>Notificaciones</button>
+    <button mat-button [matMenuTriggerFor]="menuProductos" style="color: white;"*ngIf="isVendedor()||isAdmin()||isComprador()"><mat-icon >redeem</mat-icon>Productos</button>
+    <button mat-button [matMenuTriggerFor]="menuPedidos" style="color: white;"*ngIf="isComprador()||isAdmin()||isVendedor()"><mat-icon> shop</mat-icon>Pedidos</button>
+    <button mat-button [matMenuTriggerFor]="menuOfertas" style="color: white;"*ngIf="isVendedor()||isAdmin()||isComprador()"><mat-icon>local_offer</mat-icon>Ofertas</button>
+    <button mat-button [matMenuTriggerFor]="menuNotificaciones" style="color: white;"*ngIf="isAdmin()||isComprador()||isVendedor()"><mat-icon>notifications</mat-icon>Notificaciones</button>
     <button mat-button [matMenuTriggerFor]="menuMetodosPago" style="color: white;"*ngIf="isVendedor()"><mat-icon> payment</mat-icon>Metodo de Pagos</button>
-    <button mat-button [matMenuTriggerFor]="menuDetalleCarrito" style="color: white;"*ngIf="isComprador()||isAdmin()"><mat-icon>perm_contact_calendar</mat-icon>Carrito</button>
-    <button mat-button [matMenuTriggerFor]="menuCarritos" style="color: white;"*ngIf="isComprador()||isAdmin()"><mat-icon>shopping_cart</mat-icon>Detalle Carrito</button>
+    <button mat-button [matMenuTriggerFor]="menuDetalleCarrito" style="color: white;"*ngIf="isComprador()"><mat-icon>perm_contact_calendar</mat-icon>Carrito</button>
+    <button mat-button [matMenuTriggerFor]="menuCarritos" style="color: white;"*ngIf="isComprador()"><mat-icon>shopping_cart</mat-icon>Detalle Carrito</button>
+    <button mat-button [matMenuTriggerFor]="menuReportes" style="color: white"*ngIf="isVendedor()"> <mat-icon>insert_chart</mat-icon>Reportes</button>
   </div>
   <div class="right-menu">
-    <button mat-button [matMenuTriggerFor]="menuSalir" style="color: white;"  ><mat-icon >person</mat-icon>Usuario</button>
+    <button mat-button [matMenuTriggerFor]="menuSalir" style="color: white;"  ><mat-icon >person</mat-icon><span>{{ userName }}</span></button>
   </div>
 
 </mat-toolbar>
-
     <mat-menu #menuUsuario="matMenu">
     <button mat-menu-item routerLink="/usuarios" >Listar</button>
     <button mat-menu-item routerLink="/usuarios/nuevo" >Registrar</button>
     </mat-menu>
+    <mat-menu #menuRoles="matMenu">
+      <button mat-menu-item routerLink="/roles" >Listar</button>
+      <button mat-menu-item routerLink="/roles/nuevo" >Registrar</button>
+      </mat-menu>
     <mat-menu #menuDetalleCarrito="matMenu">
     <button mat-menu-item routerLink="/carritos" >Listar</button>
     <button mat-menu-item routerLink="/carritos/nueva">Registrar</button>
     </mat-menu>
-    <mat-menu #menuTiendas="matMenu">
-    <button mat-menu-item routerLink="/tiendas" >Listar</button>
-    <button mat-menu-item routerLink="/tiendas/nuevo" >Registrar</button>
-    </mat-menu>
+    
     <mat-menu #menuServicios="matMenu">
     <button mat-menu-item routerLink="/servicios" >Listar</button>
-    <button mat-menu-item routerLink="/servicios/nueva" >Registrar</button>
+    <button mat-menu-item routerLink="/servicios/nueva"*ngIf="isComprador()">Registrar</button>
     </mat-menu>
     <mat-menu #menuReviews="matMenu">
     <button mat-menu-item routerLink="/reviews" >Listar</button>
-    <button mat-menu-item routerLink="/reviews/nuevo" >Registrar</button>
+    <button mat-menu-item routerLink="/reviews/nuevo" *ngIf="isComprador()">Registrar</button>
     </mat-menu>
     <mat-menu #menuReclamos="matMenu">
     <button mat-menu-item routerLink="/reclamos" >Listar</button>
-    <button mat-menu-item routerLink="/reclamos/nuevo">Registrar</button>
+    <button mat-menu-item routerLink="/reclamos/nuevo"*ngIf="isComprador()">Registrar</button>
     </mat-menu>
 
     <mat-menu #menuProductos="matMenu">
     <button mat-menu-item routerLink="/productos" >Listar</button>
-    <button mat-menu-item routerLink="/productos/nuevo">Registrar</button>
+    <button mat-menu-item routerLink="/productos/nuevo"*ngIf="isVendedor()">Registrar</button>
     </mat-menu>
 
     <mat-menu #menuPedidos="matMenu">
     <button mat-menu-item routerLink="/pedidos">Listar</button>
-    <button mat-menu-item routerLink="/pedidos/nuevo">Registrar</button>
+    <button mat-menu-item routerLink="/pedidos/nuevo"*ngIf="isComprador()">Registrar</button>
     </mat-menu>
 
     <mat-menu #menuOfertas="matMenu">
     <button mat-menu-item routerLink="/ofertas" >Listar</button>
-    <button mat-menu-item routerLink="/ofertas/nuevo">Registrar</button>
+    <button mat-menu-item routerLink="/ofertas/nuevo"*ngIf="isVendedor()">Registrar</button>
     </mat-menu>
 
     <mat-menu #menuNotificaciones="matMenu">
     <button mat-menu-item routerLink="/notificaciones" >Listar</button>
-    <button mat-menu-item routerLink="/notificaciones/nuevo" >Registrar</button>
+    <button mat-menu-item routerLink="/notificaciones/nuevo" *ngIf="isAdmin()">Registrar</button>
     </mat-menu>
     <mat-menu #menuMetodosPago="matMenu">
     <button mat-menu-item routerLink="/metodopagos" >Listar</button>
@@ -73,6 +74,11 @@
     <mat-menu #menuCarritos="matMenu">
     <button mat-menu-item routerLink="/CarritoProductos" >Listar</button>
     <button mat-menu-item routerLink="/CarritoProductos/nuevo" >Registrar</button>
+    </mat-menu>
+    <mat-menu #menuReportes="matMenu">
+      <button mat-menu-item routerLink="/reportes" class="custom-menu-item"><mat-icon> bar_chart</mat-icon>Reporte Cantidad</button>
+      <button mat-menu-item routerLink="/reportes/reportesmonto" class="custom-menu-item"><mat-icon> bar_chart</mat-icon>Reporte Monto</button>
+      <button mat-menu-item routerLink="/reportes/productosmenorstock" class="custom-menu-item"><mat-icon> bar_chart</mat-icon>Reporte Productos</button>
     </mat-menu>
     <mat-menu #menuSalir="matMenu">
       <button mat-menu-item routerLink="/login" (click)="cerrar()" class="custom-menu-item"><mat-icon>logout</mat-icon><span>Cerrar sesión</span></button>

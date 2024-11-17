@@ -7,4 +7,5 @@ export class Pedido{
     fechaEntrega:Date = new Date(Date.now())
     estado:string=""
     carritoxProducto:CarritoxProducto=new CarritoxProducto()
+   
 }

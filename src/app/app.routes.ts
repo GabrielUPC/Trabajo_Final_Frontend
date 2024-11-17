@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { CreaeditausuariosComponent } from './components/usuario/creaeditausuarios/creaeditausuarios.component';
-import { TiendaComponent } from './components/tienda/tienda.component';
-import { CreaeditatiendasComponent } from './components/tienda/creaeditatiendas/creaeditatiendas.component';
 import { ReviewComponent } from './components/review/review.component';
 import { CreaeditareviewsComponent } from './components/review/creaeditareviews/creaeditareviews.component';
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
@@ -26,6 +24,12 @@ import { CreaeditacarritosComponent } from './components/carrito/creaeditacarrit
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
+import { RolesComponent } from './components/roles/roles.component';
+import { CreaeditarolesComponent } from './components/roles/creaeditaroles/creaeditaroles.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
+import { ReportesproductosvendidosComponent } from './components/reportes/reportesproductosvendidos/reportesproductosvendidos.component';
+import { ReportesmontototalpedidoComponent } from './components/reportes/reportesmontototalpedido/reportesmontototalpedido.component';
+import { ReportesmenorstockComponent } from './components/reportes/reportesmenorstock/reportesmenorstock.component';
 
 export const routes: Routes = [
   {
@@ -59,17 +63,18 @@ export const routes: Routes = [
     canActivate: [seguridadGuard],
   },
   {
-    path: 'tiendas',
-    component: TiendaComponent,
+    
+    path: 'roles',
+    component: RolesComponent,
     children: [
       {
         path: 'nuevo',
-        component: CreaeditatiendasComponent,
+        component: CreaeditarolesComponent,
       },
       {
         path: 'ediciones/:id',
-        component: CreaeditatiendasComponent,
-      }
+        component: CreaeditarolesComponent,
+      },
     ],
     canActivate: [seguridadGuard],
   },
@@ -207,5 +212,16 @@ export const routes: Routes = [
     canActivate: [seguridadGuard],
   },
   
-  
+  {
+    path: 'reportes',
+    component: ReportesComponent,
+    children:[
+      {
+        path:'reportesmonto',component:ReportesmontototalpedidoComponent
+      },
+      {
+        path:'productosmenorstock',component:ReportesmenorstockComponent
+      }
+    ]
+  },
 ];

@@ -1,4 +1,6 @@
+import { Usuario } from "./Usuario"
+
 export class Carrito{
     id:number=0
-    estado:string=""
+    u:Usuario=new Usuario()
 }

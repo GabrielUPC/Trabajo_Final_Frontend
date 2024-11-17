@@ -1,5 +1,5 @@
 import { Oferta } from "./Oferta"
-import { Tienda } from "./Tienda"
+
 import { Usuario } from "./Usuario"
 
 export class Productos{
@@ -11,6 +11,6 @@ export class Productos{
     fechavencimiento:Date =new Date(Date.now())
     stockProducto:number=0
     u:Usuario=new Usuario()
-    t:Tienda=new Tienda()
+   
     o:Oferta=new Oferta()
 }

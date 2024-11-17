@@ -11,6 +11,8 @@ import { Pedido } from '../../../models/Pedido';
 import { CarritoxproductoService } from '../../../services/carritoxproducto.service';
 import { PedidoService } from '../../../services/pedido.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Usuario } from '../../../models/Usuario';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-creaeditapedidos',
@@ -27,7 +29,13 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class CreaeditapedidosComponent {
   form: FormGroup = new FormGroup({});
+  listaEstados: { value: String; viewValue: string }[] = [
+    { value: 'Pendiente', viewValue: 'Pendiente' },
+    { value: 'Procesando', viewValue: 'Procesando' },
+    { value: 'Entregado', viewValue: 'Entregado' },
+  ];
   listacarritop: CarritoxProducto[] = [];
+  listaUsuario: Usuario[] = [];
   pedido: Pedido = new Pedido();
   edicion: boolean = false;
   id: number = 0;
@@ -50,11 +58,28 @@ export class CreaeditapedidosComponent {
       hfechaentrega: ['', Validators.required],
       hestado: ['', Validators.required],
       hcarritoproducto: ['',Validators.required],
-    });
+    },
+  {
+    validators: this.dateRangeValidator('hfechapedido', 'hfechaentrega'), 
+  });
     this.cps.list().subscribe((data) => {
       this.listacarritop = data;
     });
+   
   }
+  dateRangeValidator(startDateKey: string, endDateKey: string) {
+    return (formGroup: FormGroup) => {
+      const startDate = formGroup.controls[startDateKey].value;
+      const endDate = formGroup.controls[endDateKey].value;
+
+      if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+        formGroup.controls[endDateKey].setErrors({ dateRange: true });
+      } else {
+        formGroup.controls[endDateKey].setErrors(null);
+      }
+    };
+  }
+
   insertar(): void {
     if (this.form.valid) {
       this.pedido.idPedido = this.form.value.hcodigo;
@@ -62,7 +87,6 @@ export class CreaeditapedidosComponent {
       this.pedido.fechaEntrega = this.form.value.hfechaentrega;
       this.pedido.estado = this.form.value.hestado;
       this.pedido.carritoxProducto.idCarritoXProducto = this.form.value.hcarritoproducto;
-      
       if (this.edicion) {
         this.Ps.update(this.pedido).subscribe((data) => {
           this.Ps.list().subscribe((data) => {
@@ -70,11 +94,13 @@ export class CreaeditapedidosComponent {
           });
         });
       } else {
-        this.Ps.insert(this.pedido).subscribe((data) => {
-          this.Ps.list().subscribe((data) => {
-            this.Ps.setlist(data);
+        
+          this.Ps.insert(this.pedido).subscribe(() => {
+            this.Ps.list().subscribe((data) => {
+              this.Ps.setlist(data);
+            });
           });
-        });
+
       }
     }
     this.router.navigate(['pedidos']);
@@ -84,10 +110,11 @@ export class CreaeditapedidosComponent {
       this.Ps.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           hcodigo: new FormControl(data.idPedido),
-          hfechapedido: new FormControl(data.fechacPedido),
-          hfechaentrega: new FormControl(data.fechaEntrega),
+          hfechapedido: new FormControl(data.fechacPedido,Validators.required),
+          hfechaentrega: new FormControl(data.fechaEntrega,Validators.required),
           hestado: new FormControl(data.estado),
           hcarritoproducto: new FormControl(data.carritoxProducto.idCarritoXProducto),
+        
         });
       });
     }

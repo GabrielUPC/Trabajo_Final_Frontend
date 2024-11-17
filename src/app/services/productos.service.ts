@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Productos } from '../models/Productos';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ProductosMasVendidos } from '../models/ProductosMasVendidos';
+import { ProductosMenorStock } from '../models/ProductosMenorStock';
 const base_url=environment.base
 @Injectable({
   providedIn: 'root'
@@ -31,5 +33,11 @@ export class ProductoService {
   }
   delete(id:number){
     return this.http.delete(`${this.url}/${id}`)
+  }
+  getProductosV():Observable<ProductosMasVendidos[]>{
+    return this.http.get<ProductosMasVendidos[]>(`${this.url}/productosmasvendidos`)
+  }
+  getProductosM():Observable<ProductosMenorStock[]>{
+    return this.http.get<ProductosMenorStock[]>(`${this.url}/productosmenorstock`)
   }
 }

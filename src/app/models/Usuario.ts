@@ -6,4 +6,6 @@ export class Usuario{
     correo:string=""
     telefono:string=""
     username:string=""
+    password:string=""
+    enabled:boolean=false;
 }
