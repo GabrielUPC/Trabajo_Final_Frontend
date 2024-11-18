@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/trabajo-final",
             "index": "src/index.html",
@@ -116,4 +116,4 @@
   "cli": {
     "analytics": "b70c9493-859a-4185-be8e-2355e68f120c"
   }
-}
+} 
