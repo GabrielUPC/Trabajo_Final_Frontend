@@ -30,14 +30,6 @@
     <button mat-menu-item routerLink="/carritos" >Listar</button>
     <button mat-menu-item routerLink="/carritos/nueva">Registrar</button>
     </mat-menu>
-    <mat-menu #menuTiendas="matMenu">
-    <button mat-menu-item routerLink="/tiendas" >Listar</button>
-    <button mat-menu-item routerLink="/tiendas/nuevo" >Registrar</button>
-    </mat-menu>
-    <mat-menu #menuServicios="matMenu">
-    <button mat-menu-item routerLink="/servicios" >Listar</button>
-    <button mat-menu-item routerLink="/servicios/nueva" >Registrar</button>
-    </mat-menu>
     <mat-menu #menuReviews="matMenu">
     <button mat-menu-item routerLink="/reviews" >Listar</button>
     <button mat-menu-item routerLink="/reviews/nuevo" >Registrar</button>
@@ -57,23 +49,7 @@
     <button mat-menu-item routerLink="/pedidos/nuevo">Registrar</button>
     </mat-menu>
 
-    <mat-menu #menuOfertas="matMenu">
-    <button mat-menu-item routerLink="/ofertas" >Listar</button>
-    <button mat-menu-item routerLink="/ofertas/nuevo">Registrar</button>
-    </mat-menu>
 
-    <mat-menu #menuNotificaciones="matMenu">
-    <button mat-menu-item routerLink="/notificaciones" >Listar</button>
-    <button mat-menu-item routerLink="/notificaciones/nuevo" >Registrar</button>
-    </mat-menu>
-    <mat-menu #menuMetodosPago="matMenu">
-    <button mat-menu-item routerLink="/metodopagos" >Listar</button>
-    <button mat-menu-item routerLink="/metodopagos/nuevo" >Registrar</button>
-    </mat-menu>
-    <mat-menu #menuCarritos="matMenu">
-    <button mat-menu-item routerLink="/CarritoProductos" >Listar</button>
-    <button mat-menu-item routerLink="/CarritoProductos/nuevo" >Registrar</button>
-    </mat-menu>
     <mat-menu #menuSalir="matMenu">
       <button mat-menu-item routerLink="/login" (click)="cerrar()" class="custom-menu-item"><mat-icon>logout</mat-icon><span>Cerrar sesión</span></button>
       <button mat-menu-item class="custom-menu-item">  Rol: <span>{{ role }}</span></button>
