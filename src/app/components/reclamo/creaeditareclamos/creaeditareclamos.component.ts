@@ -48,7 +48,17 @@ export class CreaeditareclamosComponent {
     this.form = this.formbuilder.group({
       hcodigo: [''],
       hcontenido: ['', Validators.required],
+<<<<<<< HEAD
       hfechaReclamo: ['', Validators.required],
+=======
+      hfechaReclamo:  [
+        '',
+        [
+          Validators.required,
+          this.maxDateValidator(), // Llamada a la validación personalizada para la fecha máxima
+        ],
+      ],
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
       hpedido: ['', Validators.required],
     });
     this.Ps.list().subscribe((data) => {
@@ -78,6 +88,19 @@ export class CreaeditareclamosComponent {
     }
     this.router.navigate(['reclamos']);
   }
+<<<<<<< HEAD
+=======
+  maxDateValidator() {
+    const today = new Date();
+    return (control: FormControl) => {
+      const selectedDate = new Date(control.value);
+      if (selectedDate > today) {
+        return { futureDate: true };
+      }
+      return null;
+    };
+  }
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
   init() {
     if (this.edicion) {
       this.rs.listId(this.id).subscribe((data) => {

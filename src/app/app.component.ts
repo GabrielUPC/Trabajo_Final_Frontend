@@ -25,13 +25,25 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'TRABAJO_FINAl';
   role: string = '';
+<<<<<<< HEAD
+=======
+  userName:string='';
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
   constructor(private loginService: LoginService) {}
   cerrar() {
     sessionStorage.clear();
   }
 
   verificar() {
+<<<<<<< HEAD
     this.role = this.loginService.showRole();
+=======
+    const userInfo = this.loginService.showRole();
+    if (userInfo) {
+      this.role = userInfo.role || '';
+      this.userName = userInfo.name || '';
+    }
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
     return this.loginService.verificar();
   }
   isVendedor() {

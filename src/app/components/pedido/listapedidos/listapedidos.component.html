@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <div class="title text-center ">
+    <h1>Lista de Pedidos</h1>
+  </div>
+  <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef> Id Producto </th>
+        <td mat-cell *matCellDef="let element"> {{element.idPedido}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef> Fecha del Pedido </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechacPedido}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef> Fecha de la Entrega </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechaEntrega}} </td>
+      </ng-container> 
+
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+      </ng-container>  
+
+      <!-- Mostrar Carrito solo si es ADMIN -->
+      <ng-container *ngIf="isAdmin()" matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Carrito </th>
+        <td mat-cell *matCellDef="let element"> {{element.carritoxProducto.idCarritoXProducto}} </td>
+      </ng-container>
+
+     
+
+      <!-- Acciones para ADMIN y COMPRADOR -->
+      <ng-container *ngIf="isAdmin() " matColumnDef="accion1">
+        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+        <td mat-cell *matCellDef="let element" (click)="eliminar(element.idPedido)">
+          <mat-icon style="color: rgb(8, 138, 95)">delete</mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-container *ngIf="isAdmin() " matColumnDef="accion2">
+        <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+        <td mat-cell *matCellDef="let element"> 
+          <button mat-raised-button [routerLink]="['ediciones',element.idPedido]">
+            <mat-icon style="color: rgb(8, 138, 95)">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator
+    [pageSizeOptions]="[4, 7, 10]"
+    showFirstLastButtons
+    aria-label="Paginador de Pedidos">
+  </mat-paginator>
+  </div>
+</div>

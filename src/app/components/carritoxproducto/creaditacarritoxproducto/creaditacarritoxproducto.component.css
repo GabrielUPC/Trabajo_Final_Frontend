@@ -1,0 +1,46 @@
+
+  .styled-form {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  .input-field {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+  .custom-button {
+    background-color: #bcc851;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+  .custom-button:hover {
+    background-color: #aab645;
+    box-shadow: 0 4px 6px rgba(6, 76, 57, 0.2);
+  }
+  .custom-button:disabled {
+    background-color: #cfdfb2;
+    color: #ffffff;
+    cursor: not-allowed;
+  }
+  .title {
+    font-family: 'Arial', sans-serif;
+ 
+    color: #98a143;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+
+    font-size: 24px;
+  }

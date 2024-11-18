@@ -1,13 +1,44 @@
 import { Routes } from '@angular/router';
+<<<<<<< HEAD
+=======
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { CreaeditausuariosComponent } from './components/usuario/creaeditausuarios/creaeditausuarios.component';
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 import { ReviewComponent } from './components/review/review.component';
 import { CreaeditareviewsComponent } from './components/review/creaeditareviews/creaeditareviews.component';
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
 import { CreaeditareclamosComponent } from './components/reclamo/creaeditareclamos/creaeditareclamos.component';
+<<<<<<< HEAD
+=======
+import { ProductosComponent } from './components/productos/productos.component';
+import { CreaeditaproductosComponent } from './components/productos/creaeditaproductos/creaeditaproductos.component';
+import { PedidoComponent } from './components/pedido/pedido.component';
+import { CreaeditapedidosComponent } from './components/pedido/creaeditapedidos/creaeditapedidos.component';
+import { OfertaComponent } from './components/oferta/oferta.component';
+import { CreaeditaofertasComponent } from './components/oferta/creaeditaofertas/creaeditaofertas.component';
+import { NotificacionComponent } from './components/notificacion/notificacion.component';
+import { CreaeditanotificacionComponent } from './components/notificacion/creaeditanotificacion/creaeditanotificacion.component';
+import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.component';
+import { CreaeditametodopagoComponent } from './components/metodo-pago/creaeditametodopago/creaeditametodopago.component';
+import { CarritoxProductoComponent } from './components/carritoxproducto/carritoxproducto.component';
+import { CreaditacarritoxproductoComponent } from './components/carritoxproducto/creaditacarritoxproducto/creaditacarritoxproducto.component';
+import { ServicioclienteComponent } from './components/serviciocliente/serviciocliente.component';
+import { CreaeditaserviciosclientesComponent } from './components/serviciocliente/creaeditaserviciosclientes/creaeditaserviciosclientes.component';
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { CreaeditacarritosComponent } from './components/carrito/creaeditacarritos/creaeditacarritos.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
+<<<<<<< HEAD
+=======
+import { RolesComponent } from './components/roles/roles.component';
+import { CreaeditarolesComponent } from './components/roles/creaeditaroles/creaeditaroles.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
+import { ReportesproductosvendidosComponent } from './components/reportes/reportesproductosvendidos/reportesproductosvendidos.component';
+import { ReportesmontototalpedidoComponent } from './components/reportes/reportesmontototalpedido/reportesmontototalpedido.component';
+import { ReportesmenorstockComponent } from './components/reportes/reportesmenorstock/reportesmenorstock.component';
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 
 export const routes: Routes = [
   {
@@ -25,6 +56,54 @@ export const routes: Routes = [
    // solo construcciones, se debe agregar a cada uno
   },
   {
+<<<<<<< HEAD
+=======
+    
+    path: 'usuarios',
+    component: UsuarioComponent,
+    children: [
+      {
+        path: 'nuevo',
+        component: CreaeditausuariosComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: CreaeditausuariosComponent,
+      },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    
+    path: 'roles',
+    component: RolesComponent,
+    children: [
+      {
+        path: 'nuevo',
+        component: CreaeditarolesComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: CreaeditarolesComponent,
+      },
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'servicios',
+    component:ServicioclienteComponent,
+    children:[
+      {
+        path:'nueva',component:CreaeditaserviciosclientesComponent
+      },
+      {
+        path:'ediciones/:id',component:CreaeditaserviciosclientesComponent
+      }
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
     path: 'carritos',
     component:CarritoComponent,
     children:[
@@ -64,4 +143,100 @@ export const routes: Routes = [
     ],
     canActivate: [seguridadGuard],
   },
+<<<<<<< HEAD
+=======
+  {
+    path: 'productos',
+    component: ProductosComponent,
+    children:[
+      {
+        path:'nuevo',component:CreaeditaproductosComponent
+      },
+      {
+        path:'ediciones/:id',component:CreaeditaproductosComponent
+      }
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'pedidos',
+    component: PedidoComponent,
+    children:[
+      {
+        path:'nuevo',component:CreaeditapedidosComponent
+      },
+      {
+        path:'ediciones/:id',component:CreaeditapedidosComponent
+      }
+    ],
+    canActivate: [seguridadGuard],
+  },
+  
+  {
+    path: 'ofertas',
+    component: OfertaComponent,
+    children:[
+      {
+        path:'nuevo',component:CreaeditaofertasComponent,
+      },
+      {
+        path:'ediciones/:id',
+        component:CreaeditaofertasComponent,
+      }
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'notificaciones',
+    component: NotificacionComponent,
+    children:[
+      {
+        path:'nuevo',component:CreaeditanotificacionComponent,
+      },
+      {
+        path:'ediciones/:id',component:CreaeditanotificacionComponent,
+      }
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'metodopagos',
+    component: MetodoPagoComponent,
+    children:[
+      {
+        path:'nuevo',component:CreaeditametodopagoComponent
+      },
+      {
+        path:'ediciones/:id',component:CreaeditametodopagoComponent
+      }
+    ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'CarritoProductos',
+    component: CarritoxProductoComponent,
+    children:[
+      {
+        path:'nuevo',component:CreaditacarritoxproductoComponent
+      },
+      {
+        path:'ediciones/:id',component:CreaditacarritoxproductoComponent
+      }
+    ],
+    canActivate: [seguridadGuard],
+  },
+  
+  {
+    path: 'reportes',
+    component: ReportesComponent,
+    children:[
+      {
+        path:'reportesmonto',component:ReportesmontototalpedidoComponent
+      },
+      {
+        path:'productosmenorstock',component:ReportesmenorstockComponent
+      }
+    ]
+  },
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 ];

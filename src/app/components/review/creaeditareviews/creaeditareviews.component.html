@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div>
     <div  class="text-center mb-4">
         <h1>Registro de Reviews</h1>
@@ -39,4 +40,49 @@
        <div><button mat-flat-button>Registrar</button></div>
       </form>
       </div>
+=======
+<div class="styled-form">
+  <div class="title text-center">
+      Registro de Reviews
+  </div>
+  <div class="form-container text-center mb-4">
+      <form [formGroup]="form" (submit)="insertar()">
+          <mat-form-field class="input-field" *ngIf="edicion" appearance="outline">
+              <mat-label>Código</mat-label>
+              <input matInput formControlName="hcodigo">
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Calificación</mat-label>
+              <input matInput formControlName="hcalificacion">
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Fecha</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="hfecha">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Comentarios</mat-label>
+              <textarea matInput placeholder="Comentarios" formControlName="hcomentarios"></textarea>
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Productos</mat-label>
+              <mat-select formControlName="hproductos">
+                  <mat-option *ngFor="let food of listaProductos" [value]="food.idProducto">
+                      {{ food.nombreProducto }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <div class="button-container">
+              <button mat-flat-button class="custom-button" [disabled]="form.invalid">Registrar</button>
+          </div>
+      </form>
+  </div>
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 </div>

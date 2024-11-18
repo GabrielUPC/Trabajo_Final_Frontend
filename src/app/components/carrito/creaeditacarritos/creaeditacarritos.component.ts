@@ -8,6 +8,10 @@ import { Carrito } from '../../../models/Carrito';
 import { CarritoService } from '../../../services/carrito.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { provideNativeDateAdapter } from '@angular/material/core';
+<<<<<<< HEAD
+=======
+import { LoginService } from '../../../services/login.service';
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 @Component({
   selector: 'app-creaeditacarritos',
   standalone: true,
@@ -25,7 +29,11 @@ export class CreaeditacarritosComponent implements OnInit{
     private cs:CarritoService,
     private formbuilder:FormBuilder,
     private router:Router,
+<<<<<<< HEAD
     private route:ActivatedRoute
+=======
+    private route:ActivatedRoute,
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
   ){}
   ngOnInit(): void {
     this.route.params.subscribe((data : Params)=>{
@@ -34,12 +42,16 @@ export class CreaeditacarritosComponent implements OnInit{
     })
     this.formCarrito=this.formbuilder.group({
       hcodigo:[''],
+<<<<<<< HEAD
       hestado:['',Validators.required]
+=======
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
     })
   }
   insertar():void{
     if(this.formCarrito.valid){
       this.carrito.id=this.formCarrito.value.hcodigo
+<<<<<<< HEAD
       this.carrito.estado=this.formCarrito.value.hestado
       if(this.edicion){
         this.cs.update(this.carrito).subscribe(data=>{
@@ -49,11 +61,15 @@ export class CreaeditacarritosComponent implements OnInit{
         });
       }
       else{
+=======
+     
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
         this.cs.insert(this.carrito).subscribe(data=>{
           this.cs.list().subscribe(data=>{
             this.cs.setlist(data)
           })
         })
+<<<<<<< HEAD
       }
     }
     this.router.navigate(['carritos'])
@@ -70,3 +86,10 @@ export class CreaeditacarritosComponent implements OnInit{
     }
   }
 }
+=======
+      
+    }
+    this.router.navigate(['carritos'])
+  }
+}
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31

@@ -11,16 +11,25 @@
       "prefix": "app",
       "architect": {
         "build": {
+<<<<<<< HEAD
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/trabajo-final",
             "index": "src/index.html",
             "browser": "src/main.ts",
+=======
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/trabajo-final",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+<<<<<<< HEAD
               "src/assets" 
             ],
             "styles": [
@@ -54,18 +63,78 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+=======
+              "src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kB",
+                  "maximumError": "20kB"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "namedChunks": false,
+              "aot": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "namedChunks": true
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+<<<<<<< HEAD
           "configurations": {
             "production": {
               "buildTarget": "Trabajo_Final:build:production"
             },
             "development": {
               "buildTarget": "Trabajo_Final:build:development"
+=======
+          "options": {
+            "browserTarget": "Trabajo_Final:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "Trabajo_Final:build:production"
+            },
+            "development": {
+              "browserTarget": "Trabajo_Final:build:development"
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
             }
           },
           "defaultConfiguration": "development"
@@ -88,16 +157,32 @@
               }
             ],
             "styles": [
+<<<<<<< HEAD
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
+=======
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
           }
         }
       }
     }
   },
   "cli": {
+<<<<<<< HEAD
     "analytics": "b70c9493-859a-4185-be8e-2355e68f120c"
   }
 }
+=======
+    "analytics": false
+  }
+}
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31

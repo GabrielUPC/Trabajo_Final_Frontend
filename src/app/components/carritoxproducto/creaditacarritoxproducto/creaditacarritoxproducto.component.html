@@ -1,0 +1,39 @@
+<div class="styled-form">
+  <h1 class="title text-center">Registro de Compras</h1>
+  
+  <div class="form-container text-center mb-4">
+      <form [formGroup]="form" (submit)="insertar()" >
+          <mat-form-field *ngIf="edicion" appearance="outline" class="input-field">
+              <mat-label>Código</mat-label>
+              <input matInput formControlName="hcodigo">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Cantidad</mat-label>
+              <input matInput formControlName="hcantidad">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Productos</mat-label>
+              <mat-select formControlName="hproductos">
+                  <mat-option *ngFor="let food of listaproductos" [value]="food.idProducto">
+                      {{ food.nombreProducto }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Carrito</mat-label>
+              <mat-select formControlName="hcarritos">
+                  <mat-option *ngFor="let food of listacarritos" [value]="food.id">
+                      {{ food.id }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <div class="button-container">
+              <button mat-flat-button class="custom-button" [disabled]="form.invalid">Registrar</button>
+          </div>
+      </form>
+  </div>
+</div>

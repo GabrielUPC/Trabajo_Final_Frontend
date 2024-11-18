@@ -2,11 +2,22 @@
   background-color: #bcc851;
   color: white;
 }
+<<<<<<< HEAD
 
+=======
+.custom-menu-item {
+  color: black;
+  &:hover {
+   color: rgb(8, 138, 95);
+
+  }
+}
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 mat-toolbar {
   overflow-x: auto;
   white-space: nowrap;
 }
+<<<<<<< HEAD
 
 mat-toolbar button {
   margin-right: 10px;
@@ -16,13 +27,21 @@ mat-toolbar button {
   display: inline-block;
 }
 
+=======
+.mat-button {
+  display: inline-block;
+}
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 @media (max-width: 768px) {
   mat-toolbar {
     display: flex;
     justify-content: space-between;
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
 .right-menu {
   margin-left: auto; /* Empuja el menú de usuarios a la derecha */
 }

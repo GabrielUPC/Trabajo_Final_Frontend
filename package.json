@@ -24,6 +24,10 @@
     "@angular/router": "^18.2.0",
     "@angular/ssr": "^18.2.7",
     "@auth0/angular-jwt": "^5.2.0",
+<<<<<<< HEAD
+=======
+    "bootstrap": "^5.3.3",
+>>>>>>> 3e03ab6fa86a5928141ba6e2078eb3f8da6c3e31
     "chart.js": "^4.4.6",
     "express": "^4.18.2",
     "http-proxy-middleware": "^3.0.3",

@@ -1,0 +1,54 @@
+<div class="styled-form">
+  <div class="title text-center">
+      Registro de Pedidos
+  </div>
+  <div class="form-container text-center mb-4">
+      <form [formGroup]="form" (submit)="insertar()">
+          <mat-form-field class="input-field" *ngIf="edicion" appearance="outline">
+              <mat-label>Código</mat-label>
+              <input matInput formControlName="hcodigo">
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Fecha de Pedido</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="hfechapedido">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Fecha de Entrega</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="hfechaentrega">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Estado</mat-label>
+              <mat-select formControlName="hestado">
+                  <mat-option *ngFor="let food of listaEstados" [value]="food.value">
+                      {{ food.viewValue }}
+                  </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('hestado')?.hasError('required') && (form.get('hestado')?.touched || form.get('hestado')?.dirty)">
+                  El campo es obligatorio.
+              </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Id Detalle Carrito</mat-label>
+              <mat-select formControlName="hcarritoproducto">
+                  <mat-option *ngFor="let food of listacarritop" [value]="food.idCarritoXProducto">
+                      {{ food.idCarritoXProducto }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <div class="button-container">
+              <button mat-flat-button class="custom-button" [disabled]="form.invalid">Registrar</button>
+          </div>
+      </form>
+  </div>
+</div>
