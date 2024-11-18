@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/trabajo-final",
             "index": "src/index.html",
@@ -21,7 +21,7 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets" 
+              "src/assets"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -73,6 +73,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "Trabajo_Final:build"
+          },
           "configurations": {
             "production": {
               "browserTarget": "Trabajo_Final:build:production"
@@ -114,6 +117,6 @@
     }
   },
   "cli": {
-    "analytics": "b70c9493-859a-4185-be8e-2355e68f120c"
+    "analytics": false
   }
-} 
+}
